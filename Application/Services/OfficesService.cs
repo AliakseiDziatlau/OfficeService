@@ -43,9 +43,9 @@ public class OfficesService : IOfficesService
         await _createOfficeUseCase.Execute(officesDto);
     }
 
-    public async Task UpdateOfficeAsync(OfficesDto officesDto)
+    public async Task UpdateOfficeAsync(string officeId, OfficesDto officesDto)
     {
-        await _updateOfficeUseCase.Execute(officesDto);
+        await _updateOfficeUseCase.Execute(officeId, officesDto);
     }
 
     public async Task DeleteOfficeAsync(string officeId)

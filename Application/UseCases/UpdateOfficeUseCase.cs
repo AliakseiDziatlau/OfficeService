@@ -13,7 +13,7 @@ public class UpdateOfficeUseCase : IUpdateOfficeUseCase
         _repository = repository;
     }
 
-    public async Task Execute(OfficesDto officesDto)
+    public async Task Execute(string officeId, OfficesDto officesDto)
     {
         
     }

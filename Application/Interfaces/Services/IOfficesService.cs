@@ -8,6 +8,6 @@ public interface IOfficesService
     Task<Offices> GetOfficeByIdAsync(string officeId);
     Task<IEnumerable<Offices>> GetAllOfficesAsync();
     Task CreateOfficeAsync(OfficesDto officesDto);
-    Task UpdateOfficeAsync(OfficesDto officesDto);
+    Task UpdateOfficeAsync(string officeId, OfficesDto officesDto);
     Task DeleteOfficeAsync(string officeId);
 }

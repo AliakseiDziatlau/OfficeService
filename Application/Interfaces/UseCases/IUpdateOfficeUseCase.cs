@@ -4,5 +4,5 @@ namespace OfficeService.Application.Interfaces.UseCases;
 
 public interface IUpdateOfficeUseCase
 {
-    Task Execute(OfficesDto officeDto);
+    Task Execute(string officeId, OfficesDto officeDto);
 }
