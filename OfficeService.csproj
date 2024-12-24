@@ -23,9 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\DTOs\" />
-      <Folder Include="Application\Interfaces\Repositories\" />
-      <Folder Include="Application\UseCases\" />
       <Folder Include="Infrastructure\ExternalServices\" />
       <Folder Include="Infrastructure\ExternalInterfaces\" />
       <Folder Include="Infrastructure\Persistence\Contexts\" />

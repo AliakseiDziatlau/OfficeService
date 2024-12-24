@@ -1,3 +1,8 @@
+using OfficeService.Application.Interfaces;
+using OfficeService.Application.Interfaces.UseCases;
+using OfficeService.Application.Services;
+using OfficeService.Application.UseCases;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var enviroment = builder.Environment.EnvironmentName;
@@ -7,6 +12,14 @@ builder.Configuration
     .AddEnvironmentVariables();
     
 //DI container
+builder.Services.AddScoped<IOfficesService, OfficesService>();
+builder.Services.AddScoped<ICreateOfficeUseCase, CreateOfficeUseCase>();
+builder.Services.AddScoped<IDeleteOfficeUseCase, DeleteOfficeUseCase>();
+builder.Services.AddScoped<IUpdateOfficeUseCase, UpdateOfficeUseCase>();
+builder.Services.AddScoped<IGetAllOfficesUseCase, GetAllOfficesUseCase>();
+builder.Services.AddScoped<IGetOfficeByIdUseCase, GetOfficeByIdUseCase>();
+
+
 
 //Connection String
 
