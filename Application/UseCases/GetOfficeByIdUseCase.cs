@@ -15,6 +15,11 @@ public class GetOfficeByIdUseCase : IGetOfficeByIdUseCase
 
     public async Task<Offices> Execute(string officeId)
     {
-        return new Offices();
+        if (string.IsNullOrEmpty(officeId))
+        {
+            throw new ArgumentException("Office ID cannot be null or empty.", nameof(officeId));
+        }
+        var office = await _repository.GetOfficeByIdAsync(officeId);
+        return office;
     }
 }

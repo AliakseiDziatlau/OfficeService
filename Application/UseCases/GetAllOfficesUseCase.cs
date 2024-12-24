@@ -16,6 +16,7 @@ public class GetAllOfficesUseCase : IGetAllOfficesUseCase
 
     public async Task<IEnumerable<Offices>> Execute()
     {
-        return new List<Offices>();
+        var offices = await _repository.GetAllOfficesAsync();
+        return offices;
     }
 }
