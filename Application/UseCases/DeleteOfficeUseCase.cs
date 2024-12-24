@@ -12,7 +12,7 @@ public class DeleteOfficeUseCase : IDeleteOfficeUseCase
         _repository = repository;
     }
 
-    public async Task Execute(int id)
+    public async Task Execute(string id)
     {
         
     }

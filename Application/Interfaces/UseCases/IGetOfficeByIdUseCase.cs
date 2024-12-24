@@ -4,5 +4,5 @@ namespace OfficeService.Application.Interfaces.UseCases;
 
 public interface IGetOfficeByIdUseCase
 {
-    Task<Offices> Execute(int officeId);
+    Task<Offices> Execute(string officeId);
 }

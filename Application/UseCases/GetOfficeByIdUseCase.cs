@@ -13,7 +13,7 @@ public class GetOfficeByIdUseCase : IGetOfficeByIdUseCase
         _repository = repository;
     }
 
-    public async Task<Offices> Execute(int officeId)
+    public async Task<Offices> Execute(string officeId)
     {
         return new Offices();
     }

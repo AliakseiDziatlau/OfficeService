@@ -4,9 +4,9 @@ namespace OfficeService.Application.Interfaces.Repositories;
 
 public interface IOfficesRepository
 {
-    Task<Offices> GetOfficeByIdAsync(int officeId);
-    Task<IEnumerable<Offices>> GetOfficesAsync();
+    Task<Offices> GetOfficeByIdAsync(string officeId);
+    Task<IEnumerable<Offices>> GetAllOfficesAsync();
     Task CreateOfficeAsync(Offices office);
-    Task UpdateOfficeAsync(Offices office);
-    Task DeleteOfficeAsync(int officeId);
+    Task UpdateOfficeAsync(string officeId, Offices office);
+    Task DeleteOfficeAsync(string officeId);
 }
