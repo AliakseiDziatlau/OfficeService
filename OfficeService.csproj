@@ -25,7 +25,6 @@
     <ItemGroup>
       <Folder Include="Infrastructure\ExternalServices\" />
       <Folder Include="Infrastructure\ExternalInterfaces\" />
-      <Folder Include="Presentation\Middlewares\" />
     </ItemGroup>
 
 </Project>

@@ -6,6 +6,7 @@ using OfficeService.Application.UseCases;
 using OfficeService.Infrastructure.Persistence.Contexts;
 using OfficeService.Infrastructure.Persistence.Repositories;
 using OfficeService.Infrastructure.Persistence.Settings;
+using OfficeService.Presentation.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +29,11 @@ builder.Services.AddScoped<IGetOfficeByIdUseCase, GetOfficeByIdUseCase>();
 builder.Services.AddScoped<IOfficesRepository, OfficesRepository>();
 builder.Services.AddSingleton<MongoDbContext>();
 
+
 builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -43,6 +46,7 @@ if (app.Environment.IsDevelopment())
     });
 }    
 
+app.UseMiddleware<AuthorizationMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
