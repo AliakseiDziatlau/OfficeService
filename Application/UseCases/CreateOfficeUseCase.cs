@@ -23,7 +23,6 @@ public class CreateOfficeUseCase : ICreateOfficeUseCase
         
         var office = new Offices
         {
-            Id = Guid.NewGuid().ToString(), 
             Address = dto.Address,
             RegistryPhoneNumber = dto.RegistryPhoneNumber,
             IsActive = dto.IsActive,

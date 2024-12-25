@@ -3,6 +3,7 @@ using OfficeService.Application.Interfaces.Repositories;
 using OfficeService.Application.Interfaces.UseCases;
 using OfficeService.Application.Services;
 using OfficeService.Application.UseCases;
+using OfficeService.Infrastructure.Persistence.Contexts;
 using OfficeService.Infrastructure.Persistence.Repositories;
 using OfficeService.Infrastructure.Persistence.Settings;
 
@@ -25,7 +26,7 @@ builder.Services.AddScoped<IUpdateOfficeUseCase, UpdateOfficeUseCase>();
 builder.Services.AddScoped<IGetAllOfficesUseCase, GetAllOfficesUseCase>();
 builder.Services.AddScoped<IGetOfficeByIdUseCase, GetOfficeByIdUseCase>();
 builder.Services.AddScoped<IOfficesRepository, OfficesRepository>();
-builder.Services.AddSingleton<MongoDbSettings>();
+builder.Services.AddSingleton<MongoDbContext>();
 
 builder.Services.AddControllers();
 
