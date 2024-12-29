@@ -20,6 +20,7 @@ builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
     
 //DI container
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IOfficesService, OfficesService>();
 builder.Services.AddScoped<ICreateOfficeUseCase, CreateOfficeUseCase>();
 builder.Services.AddScoped<IDeleteOfficeUseCase, DeleteOfficeUseCase>();

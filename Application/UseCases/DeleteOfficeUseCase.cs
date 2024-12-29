@@ -18,15 +18,13 @@ public class DeleteOfficeUseCase : IDeleteOfficeUseCase
         {
             throw new ArgumentException("Id cannot be null or empty.", nameof(id));
         }
-
-        // Проверяем, существует ли офис с указанным ID
+        
         var existingOffice = await _repository.GetOfficeByIdAsync(id);
         if (existingOffice == null)
         {
             throw new KeyNotFoundException($"Office with id '{id}' was not found.");
         }
-
-        // Удаляем офис
+        
         await _repository.DeleteOfficeAsync(id);
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using OfficeService.Application.DTOs;
 using OfficeService.Application.Interfaces.Repositories;
 using OfficeService.Application.Interfaces.UseCases;
@@ -7,10 +8,12 @@ namespace OfficeService.Application.UseCases;
 public class UpdateOfficeUseCase : IUpdateOfficeUseCase
 {
     private readonly IOfficesRepository _repository;
+    private readonly IMapper _mapper;
 
-    public UpdateOfficeUseCase(IOfficesRepository repository)
+    public UpdateOfficeUseCase(IOfficesRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     public async Task Execute(string officeId, OfficesDto officesDto)
@@ -31,11 +34,7 @@ public class UpdateOfficeUseCase : IUpdateOfficeUseCase
             throw new KeyNotFoundException($"Office with id '{officeId}' was not found.");
         }
         
-        existingOffice.Address = officesDto.Address;
-        existingOffice.RegistryPhoneNumber = officesDto.RegistryPhoneNumber;
-        existingOffice.IsActive = officesDto.IsActive;
-        existingOffice.PhotoId = officesDto.PhotoId;
-        
+       _mapper.Map(officesDto, existingOffice);
         await _repository.UpdateOfficeAsync(officeId, existingOffice);
     }
 }

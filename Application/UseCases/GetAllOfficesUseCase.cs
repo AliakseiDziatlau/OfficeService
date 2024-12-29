@@ -1,3 +1,5 @@
+using AutoMapper;
+using OfficeService.Application.DTOs;
 using OfficeService.Application.Interfaces;
 using OfficeService.Application.Interfaces.Repositories;
 using OfficeService.Application.Interfaces.UseCases;
@@ -8,15 +10,17 @@ namespace OfficeService.Application.UseCases;
 public class GetAllOfficesUseCase : IGetAllOfficesUseCase
 {
     private readonly IOfficesRepository _repository;
+    private readonly IMapper _mapper;
 
-    public GetAllOfficesUseCase(IOfficesRepository repository)
+    public GetAllOfficesUseCase(IOfficesRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Offices>> Execute()
+    public async Task<IEnumerable<OfficesDto>> Execute()
     {
         var offices = await _repository.GetAllOfficesAsync();
-        return offices;
+        return _mapper.Map<IEnumerable<OfficesDto>>(offices);
     }
 }
