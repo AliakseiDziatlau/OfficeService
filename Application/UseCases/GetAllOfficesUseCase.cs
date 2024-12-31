@@ -11,16 +11,25 @@ public class GetAllOfficesUseCase : IGetAllOfficesUseCase
 {
     private readonly IOfficesRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ILogger<GetAllOfficesUseCase> _logger;
 
-    public GetAllOfficesUseCase(IOfficesRepository repository, IMapper mapper)
+    public GetAllOfficesUseCase(IOfficesRepository repository, IMapper mapper, ILogger<GetAllOfficesUseCase> logger)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<OfficesDto>> Execute()
     {
+        _logger.LogInformation("Fetching all offices.");
+        
         var offices = await _repository.GetAllOfficesAsync();
-        return _mapper.Map<IEnumerable<OfficesDto>>(offices);
+        _logger.LogInformation("Retrieved {Count} offices from the repository.", offices.Count());
+        
+        var officesDto = _mapper.Map<IEnumerable<OfficesDto>>(offices);
+        _logger.LogInformation("Mapped {Count} offices to DTOs.", officesDto.Count());
+        
+        return officesDto;
     }
 }

@@ -7,6 +7,7 @@ using OfficeService.Infrastructure.Persistence.Contexts;
 using OfficeService.Infrastructure.Persistence.Repositories;
 using OfficeService.Infrastructure.Persistence.Settings;
 using OfficeService.Presentation.Middlewares;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,13 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{enviroment}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) 
+    .WriteTo.Console()                             
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.Configure<MongoDbSettings>(
     builder.Configuration.GetSection("MongoDbSettings"));
