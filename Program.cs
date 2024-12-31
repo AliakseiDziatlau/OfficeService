@@ -55,6 +55,7 @@ if (app.Environment.IsDevelopment())
     });
 }    
 
+app.UseSerilogRequestLogging();
 app.UseMiddleware<AuthorizationMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
