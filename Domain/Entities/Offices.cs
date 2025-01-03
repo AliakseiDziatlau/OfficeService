@@ -1,13 +1,20 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace OfficeService.Domain.Entities;
 
 public class Offices
 {
-    [Key]
-    public int Id { get; set; }
+    [BsonId] 
+    [BsonRepresentation(BsonType.ObjectId)] 
+    public string? Id { get; set; } 
+    [BsonElement("address")]
     public string Address { get; set; }
-    public int photoId { get; set; }
-    public string registryPhoneNumber { get; set; }
-    public bool isActive { get; set; }
+    [BsonElement("photoId")]
+    public int? PhotoId { get; set; } 
+    [BsonElement("registryPhoneNumber")]
+    public string RegistryPhoneNumber { get; set; }
+    [BsonElement("isActive")]
+    public bool IsActive { get; set; }
 }

@@ -1,19 +1,49 @@
+using OfficeService.Application.Interfaces;
+using OfficeService.Application.Interfaces.Repositories;
+using OfficeService.Application.Interfaces.UseCases;
+using OfficeService.Application.Services;
+using OfficeService.Application.UseCases;
+using OfficeService.Infrastructure.Persistence.Contexts;
+using OfficeService.Infrastructure.Persistence.Repositories;
+using OfficeService.Infrastructure.Persistence.Settings;
+using OfficeService.Presentation.Middlewares;
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var enviroment = builder.Environment.EnvironmentName;
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{enviroment}.json", optional: true, reloadOnChange: true)
+    .AddUserSecrets<Program>(optional: true)
     .AddEnvironmentVariables();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration) 
+    .WriteTo.Console()                             
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings"));
     
 //DI container
+builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<IOfficesService, OfficesService>();
+builder.Services.AddScoped<ICreateOfficeUseCase, CreateOfficeUseCase>();
+builder.Services.AddScoped<IDeleteOfficeUseCase, DeleteOfficeUseCase>();
+builder.Services.AddScoped<IUpdateOfficeUseCase, UpdateOfficeUseCase>();
+builder.Services.AddScoped<IGetAllOfficesUseCase, GetAllOfficesUseCase>();
+builder.Services.AddScoped<IGetOfficeByIdUseCase, GetOfficeByIdUseCase>();
+builder.Services.AddScoped<IOfficesRepository, OfficesRepository>();
+builder.Services.AddSingleton<MongoDbContext>();
 
-//Connection String
 
 builder.Services.AddControllers();
-//addDBContext
 
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -26,6 +56,8 @@ if (app.Environment.IsDevelopment())
     });
 }    
 
+app.UseSerilogRequestLogging();
+app.UseMiddleware<AuthorizationMiddleware>();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
