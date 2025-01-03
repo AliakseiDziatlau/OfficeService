@@ -5,9 +5,9 @@ namespace OfficeService.Application.Interfaces;
 
 public interface IOfficesService
 {
-    Task<Offices> GetOfficeByIdAsync(string officeId);
-    Task<IEnumerable<Offices>> GetAllOfficesAsync();
+    Task<OfficesDto> GetOfficeByIdAsync(string officeId);
+    Task<IEnumerable<OfficesDto>> GetAllOfficesAsync();
     Task CreateOfficeAsync(OfficesDto officesDto);
-    Task UpdateOfficeAsync(OfficesDto officesDto);
+    Task UpdateOfficeAsync(string officeId, OfficesDto officesDto);
     Task DeleteOfficeAsync(string officeId);
 }

@@ -28,12 +28,12 @@ public class OfficesService : IOfficesService
         _getAllOfficesUseCase = getAllOfficesUseCase;
     }
 
-    public async Task<Offices> GetOfficeByIdAsync(string officeId)
+    public async Task<OfficesDto> GetOfficeByIdAsync(string officeId)
     {
        return await _getOfficeByIdUseCase.Execute(officeId);
     }
 
-    public async Task<IEnumerable<Offices>> GetAllOfficesAsync()
+    public async Task<IEnumerable<OfficesDto>> GetAllOfficesAsync()
     {
         return await _getAllOfficesUseCase.Execute();
     }
@@ -43,9 +43,9 @@ public class OfficesService : IOfficesService
         await _createOfficeUseCase.Execute(officesDto);
     }
 
-    public async Task UpdateOfficeAsync(OfficesDto officesDto)
+    public async Task UpdateOfficeAsync(string officeId, OfficesDto officesDto)
     {
-        await _updateOfficeUseCase.Execute(officesDto);
+        await _updateOfficeUseCase.Execute(officeId, officesDto);
     }
 
     public async Task DeleteOfficeAsync(string officeId)
