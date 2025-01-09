@@ -8,11 +8,11 @@ namespace OfficeService.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class OfficeController : ControllerBase
+public class OfficesController : ControllerBase
 {
     private readonly IOfficesService _officeService;
 
-    public OfficeController(IOfficesService officeService)
+    public OfficesController(IOfficesService officeService)
     {
         _officeService = officeService;
     }
